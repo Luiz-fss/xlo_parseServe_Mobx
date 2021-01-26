@@ -42,6 +42,7 @@ class SignUpScreen extends StatelessWidget {
                     Observer(
                         builder: (_){
                           return TextField(
+                            enabled: !signupStore.loading,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: "Exemplo Luiz F.",
@@ -61,6 +62,7 @@ class SignUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_){
                         return TextField(
+                          enabled: !signupStore.loading,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: "luiz@gmail.com",
@@ -82,6 +84,7 @@ class SignUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_){
                         return TextField(
+                          enabled: !signupStore.loading,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: "(99)99999-9999",
@@ -108,6 +111,7 @@ class SignUpScreen extends StatelessWidget {
                     Observer(
                         builder: (_){
                           return TextField(
+                            enabled: !signupStore.loading,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 errorText: signupStore.pass1Error,
@@ -127,6 +131,7 @@ class SignUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_){
                         return TextField(
+                          enabled: !signupStore.loading,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               errorText: signupStore.pass2Error,
@@ -141,21 +146,30 @@ class SignUpScreen extends StatelessWidget {
                     //const SizedBox(height: 16,),
 
                     //botão
-                    Container(
-                      margin: const EdgeInsets.only(top: 20,bottom: 12),
-                      height: 40,
-                      child: RaisedButton(
-                        color: Colors.orange,
-                        child: Text(
-                          "CADASTRAR",
-                        ),
-                        textColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)
-                        ),
-                        onPressed: (){},
-                      ),
+                    Observer(
+                      builder: (_){
+                        return Container(
+                          margin: const EdgeInsets.only(top: 20,bottom: 12),
+                          height: 40,
+                          child: RaisedButton(
+                            color: Colors.orange,
+                            disabledColor: Colors.orange.withAlpha(120),
+                            child:signupStore.loading ?
+                            CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(Colors.white),
+                            )
+                                : Text(
+                              "CADASTRAR",
+                            ),
+                            textColor: Colors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            onPressed: signupStore.signUpPressed
+                          ),
+                        );
+                      },
                     ),
 
                     Divider(color: Colors.black,),
