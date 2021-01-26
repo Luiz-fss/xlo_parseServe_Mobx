@@ -102,4 +102,25 @@ abstract class _SignupStore with Store{
     }
   }
 
+  @computed
+  bool get isValidForm => namedValid && emailValid && phoneValid && pass1Valid && pass2Valid;
+
+  @observable
+  bool loading=false;
+  //@action
+  //void setLoading(bool value)=> loading=value;
+  @action
+  Future<void> _signUp()async{
+    //setLoading(true);
+    loading = true;
+    await Future.delayed(Duration(seconds: 3));
+    //setLoading(false);
+    loading=false;
+  }
+
+  @computed
+  Function get signUpPressed => (isValidForm && !loading) ? _signUp : null;
+
+
+
 }
