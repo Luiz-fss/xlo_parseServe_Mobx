@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xlo_mobx_parse_server/screens/signup/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -63,9 +64,10 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 3,bottom: 4),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Senha",
+                          "Senha ",
                           style: TextStyle(
                             color: Colors.grey[800],
                             fontSize: 16,
@@ -74,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           child: Text(
-                            "Esqueceu sua senha",
+                            "Esqueceu sua senha?",
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: Colors.purple
@@ -121,19 +123,19 @@ class LoginScreen extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: [
                         const Text(
-                          "Não tem uma conta?",
+                          "Não tem uma conta? ",
                           style: TextStyle(
                             fontSize: 16
                           ),
                         ),
                         GestureDetector(
                           onTap: (){
-                            //Navigator.push(context, MaterialPageRoute(
-                              //  builder: (context)=> SignUpScreen()
-                            //));
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context)=> SignUpScreen()
+                            ));
                           },
                           child: Text(
-                            "Cadastro",
+                            "Cadastre-se",
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: Colors.purple,
