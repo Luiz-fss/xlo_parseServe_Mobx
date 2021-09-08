@@ -12,20 +12,19 @@ class PageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
+    return new ListTile(
+      title: new Text(
           label,
         style: TextStyle(
           color: highlighted==true ? Colors.purple : Colors.black,
           fontWeight: FontWeight.w700
         )
       ),
-      leading: Icon(
+      leading: new Icon(
         iconData,
         color: highlighted==true ? Colors.purple : Colors.black,
       ),
       onTap: onTap,
-
     );
   }
 }

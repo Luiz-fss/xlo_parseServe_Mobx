@@ -9,13 +9,13 @@ class FieldTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return new Padding(
       padding: EdgeInsets.only(left: 3,bottom: 4),
-      child: Wrap(
+      child: new Wrap(
         //alinhando o subtitulo
         crossAxisAlignment: WrapCrossAlignment.end,
         children: [
-          Text(
+          new Text(
             "$title ",
             style: TextStyle(
               color: Colors.grey[800],
@@ -23,7 +23,7 @@ class FieldTitle extends StatelessWidget {
               fontWeight: FontWeight.w700
             ),
           ),
-          Text(
+          new Text(
             "$subtitle",
             style: TextStyle(
               color: Colors.grey,

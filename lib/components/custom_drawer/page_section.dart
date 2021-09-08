@@ -9,9 +9,9 @@ class PageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return new Column(
       children: [
-        PageTile(
+        new PageTile(
           label: "Anúncios",
           iconData: Icons.list,
           onTap:(){
@@ -20,7 +20,7 @@ class PageSection extends StatelessWidget {
           },
           highlighted: pageStore.page == 0
         ),
-        PageTile(
+        new PageTile(
             label: "Inserir Anúncio",
             iconData: Icons.edit,
             onTap:(){
@@ -28,7 +28,7 @@ class PageSection extends StatelessWidget {
             },
             highlighted: pageStore.page == 1
         ),
-        PageTile(
+        new PageTile(
             label: "Chat",
             iconData: Icons.chat,
             onTap:(){
@@ -39,7 +39,7 @@ class PageSection extends StatelessWidget {
             },
             highlighted: pageStore.page == 2
         ),
-        PageTile(
+        new PageTile(
             label: "Favoritos",
             iconData: Icons.favorite,
             onTap:(){
@@ -48,7 +48,7 @@ class PageSection extends StatelessWidget {
             },
             highlighted: pageStore.page == 3
         ),
-        PageTile(
+        new PageTile(
             label: "Minha Conta",
             iconData: Icons.person,
             onTap:(){
