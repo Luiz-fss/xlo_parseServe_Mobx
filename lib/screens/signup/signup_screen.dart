@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:xlo_mobx_parse_server/components/error_box.dart';
 import 'package:xlo_mobx_parse_server/screens/signup/components/field_title.dart';
 import 'package:xlo_mobx_parse_server/stores/signup_store.dart';
 
@@ -11,40 +12,47 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return new Scaffold(
+      appBar: new AppBar(
         title: const Text(
             "Cadastro"
         ),
         centerTitle: true,
       ),
-      body: Container(
+      body: new Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          child: Padding(
+          child: new Padding(
             padding: const EdgeInsets.only(bottom: 16),
-            child: Card(
+            child: new Card(
               margin: const EdgeInsets.symmetric(horizontal: 32),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16)
               ),
               elevation: 8,
-              child: Padding(
+              child: new Padding(
                 padding: const EdgeInsets.all(16),
-                child: Column(
+                child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    FieldTitle(
+                    new Observer(
+                      builder: (_){
+                        return new ErrorBox(
+                          message: signupStore.error
+                        );
+                      },
+                    ),
+                    new FieldTitle(
                       title: "Apelido",
                       subtitle: "Como aparecerá em seus anuncios",
                     ),
-                    Observer(
+                    new Observer(
                         builder: (_){
-                          return TextField(
+                          return new TextField(
                             enabled: !signupStore.loading,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                            decoration: new InputDecoration(
+                                border: new OutlineInputBorder(),
                                 hintText: "Exemplo Luiz F.",
                                 isDense: true,
                                 errorText: signupStore.nameErro
@@ -52,19 +60,17 @@ class SignUpScreen extends StatelessWidget {
                             onChanged: signupStore.setName,
                           );
                         }),
-
                     const SizedBox(height: 16,),
-
-                    FieldTitle(
+                    new FieldTitle(
                       title: "E-mail",
                       subtitle: "Enviaremos um e-mail de confirmação",
                     ),
-                    Observer(
+                    new Observer(
                       builder: (_){
-                        return TextField(
+                        return new TextField(
                           enabled: !signupStore.loading,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                          decoration: new InputDecoration(
+                              border: new OutlineInputBorder(),
                               hintText: "luiz@gmail.com",
                               errorText: signupStore.emailErro,
                               isDense: true
@@ -73,20 +79,19 @@ class SignUpScreen extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
                         );
-                      },),
+                      },
+                    ),
                     const SizedBox(height: 16,),
-
-
-                    FieldTitle(
+                    new FieldTitle(
                       title: "Celular",
                       subtitle: "Proteja sua conta",
                     ),
-                    Observer(
+                    new Observer(
                       builder: (_){
-                        return TextField(
+                        return new TextField(
                           enabled: !signupStore.loading,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                          decoration: new InputDecoration(
+                              border: new OutlineInputBorder(),
                               hintText: "(99)99999-9999",
                               errorText: signupStore.phoneError,
                               isDense: true
@@ -103,17 +108,16 @@ class SignUpScreen extends StatelessWidget {
 
                     const SizedBox(height: 16,),
 
-
-                    FieldTitle(
+                    new FieldTitle(
                       title: "Senha",
                       subtitle: "Use letras, números e caracteres especiais",
                     ),
-                    Observer(
+                    new Observer(
                         builder: (_){
-                          return TextField(
+                          return new TextField(
                             enabled: !signupStore.loading,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                            decoration: new InputDecoration(
+                                border: new OutlineInputBorder(),
                                 errorText: signupStore.pass1Error,
                                 isDense: true
                             ),
@@ -121,19 +125,17 @@ class SignUpScreen extends StatelessWidget {
                             obscureText: true,
                           );
                         }),
-
-
                     const SizedBox(height: 16,),
-                    FieldTitle(
+                    new FieldTitle(
                       title: "Confirmar Senha",
                       subtitle: "Repita a senha",
                     ),
-                    Observer(
+                    new Observer(
                       builder: (_){
-                        return TextField(
+                        return new TextField(
                           enabled: !signupStore.loading,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                          decoration: new InputDecoration(
+                              border: new OutlineInputBorder(),
                               errorText: signupStore.pass2Error,
                               isDense: true
                           ),
@@ -142,28 +144,25 @@ class SignUpScreen extends StatelessWidget {
                         );
                       },
                     ),
-
                     //const SizedBox(height: 16,),
-
                     //botão
-                    Observer(
+                    new Observer(
                       builder: (_){
-                        return Container(
+                        return new Container(
                           margin: const EdgeInsets.only(top: 20,bottom: 12),
                           height: 40,
-                          child: RaisedButton(
+                          child: new RaisedButton(
                             color: Colors.orange,
                             disabledColor: Colors.orange.withAlpha(120),
                             child:signupStore.loading ?
-                            CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(Colors.white),
-                            )
-                                : Text(
+                            new CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation(Colors.white),
+                            ) : new Text(
                               "CADASTRAR",
                             ),
                             textColor: Colors.white,
                             elevation: 0,
-                            shape: RoundedRectangleBorder(
+                            shape: new RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)
                             ),
                             onPressed: signupStore.signUpPressed
@@ -172,31 +171,30 @@ class SignUpScreen extends StatelessWidget {
                       },
                     ),
 
-                    Divider(color: Colors.black,),
+                    new Divider(color: Colors.black,),
 
-                    Padding(
+                    new Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
+                      child: new Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          const  Text(
                             "Já tem uma conta ?",
-                            style: TextStyle(
+                            style:  TextStyle(
                               fontSize: 16
                             ),
                           ),
-                          GestureDetector(
+                          new GestureDetector(
                             onTap: (){
                               Navigator.pop(context);
                             },
-                            child: Text(
+                            child: new Text(
                               "Entrar",
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 color: Colors.purple,
                                 fontSize: 16
                               ),
-
                             ),
                           )
                         ],

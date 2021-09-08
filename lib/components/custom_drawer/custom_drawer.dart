@@ -5,19 +5,19 @@ import 'custom_drawer_header.dart';
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return new ClipRRect(
       /*Com a propriedade horizontal é permetido decidir se quer
       * colar um raio, tanto na esquerda como na direita*/
       borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
-      child: SizedBox(
+      child: new SizedBox(
           width: MediaQuery.of(context).size.width * 0.65,
-          child: Drawer(
-            child: ListView(
+          child: new Drawer(
+            child: new ListView(
               children: [
                 //header
-                CustomDrawerHeader(),
+                new CustomDrawerHeader(),
                 //paginas
-                PageSection()
+                new PageSection()
               ],
             )
           ),
