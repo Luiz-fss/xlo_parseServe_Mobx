@@ -114,25 +114,24 @@ abstract class _SignupStore with Store{
   @observable
   String error;
 
-  //@action
-  //void setLoading(bool value)=> loading=value;
+  @action
+  void setLoading(bool value)=> loading=value;
   @action
   Future<void> _signUp()async{
     //setLoading(true);
     loading = true;
-    final user = User(
+    final user = new User(
       name: name,
       email: email,
       phone: phone,
       password: pass1
-
     );
     try{
-      userRepository().signUp(user);
+      final resultUser = await UserRepository().signUp(user);
+      print(resultUser);
     }catch(e){
       error = e;
     }
-
     //setLoading(false);
     loading=false;
   }
