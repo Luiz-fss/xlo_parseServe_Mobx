@@ -229,6 +229,17 @@ mixin _$SignupStore on _SignupStore, Store {
   }
 
   @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_SignupStoreActionController.startAction(
+        name: '_SignupStore.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_SignupStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 name: ${name},
