@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:xlo_mobx_parse_server/screens/signup/signup_screen.dart';
+import 'package:xlo_mobx_parse_server/stores/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
+
+  final LoginStore loginStore = LoginStore();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -51,14 +56,18 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  new TextField(
-                    decoration: new InputDecoration(
-                      border: const OutlineInputBorder(),
-                      isDense: true
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-
+                  new Observer(builder: (_){
+                    return new TextField(
+                      enabled: !loginStore.loading,
+                      decoration: new InputDecoration(
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          errorText: loginStore.emailError
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: loginStore.setEmail,
+                    );
+                  }),
                   const SizedBox(height: 16,),
                   //campo senha
                   new Padding(
@@ -87,31 +96,43 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  new TextField(
+                  new Observer(builder: (_){
+                  return new TextField(
+                    enabled: !loginStore.loading,
                     decoration: new InputDecoration(
-                      border: new OutlineInputBorder(),
-                      isDense: true
+                        border: new OutlineInputBorder(),
+                        isDense: true,
+                        errorText: loginStore.passwordError
                     ),
                     obscureText: true,
+                    onChanged: loginStore.setPassword,
+                  );
+                  }
                   ),
 
                   //botão de login
-                  new Container(
-                    margin: const EdgeInsets.only(top: 20,bottom: 12),
-                    height: 40,
-                    child: new RaisedButton(
-                      color: Colors.orange,
-                      child: new Text(
-                        "ENTRAR",
+                  Observer(builder: (_){
+                    return new Container(
+                      margin: const EdgeInsets.only(top: 20,bottom: 12),
+                      height: 40,
+                      child: new RaisedButton(
+                        color: Colors.orange,
+                        disabledColor: Colors.orange.withAlpha(120),
+                        child: loginStore.loading ?
+                        new CircularProgressIndicator(
+                          valueColor: new AlwaysStoppedAnimation(Colors.white),
+                        ) : new Text(
+                          "ENTRAR",
+                        ),
+                        textColor: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)
+                        ),
+                        onPressed: loginStore.loginPresed,
                       ),
-                      textColor: Colors.white,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)
-                      ),
-                      onPressed: (){},
-                    ),
-                  ),
+                    );
+                  }),
 
                   const Divider(color: Colors.black,),
                   //acessar cadastro
