@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:xlo_mobx_parse_server/screens/login/login_screen.dart';
+import 'package:xlo_mobx_parse_server/stores/page_store.dart';
+import 'package:xlo_mobx_parse_server/stores/user_manager_store.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
+
+  final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
+
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
       onTap: (){
         //fechando o drawer para não ficar sobreposto
         Navigator.of(context).pop();
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) => new LoginScreen()
-        ));
+        if(userManagerStore.isLoggedIn){
+          GetIt.I<PageStore>().setPage(4);
+        }else{
+          Navigator.push(context, new MaterialPageRoute(
+              builder: (context) => new LoginScreen()
+          ));
+        }
       },
       child: new Container(
         color: Colors.purple,
@@ -26,6 +36,8 @@ class CustomDrawerHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   new Text(
+                    userManagerStore.isLoggedIn ?
+                        userManagerStore.user.name :
                     "Acesse sua conta agora!",
                     style: TextStyle(
                       color: Colors.white,
@@ -34,6 +46,8 @@ class CustomDrawerHeader extends StatelessWidget {
                     ),
                   ),
                   new Text(
+                    userManagerStore.isLoggedIn ?
+                        userManagerStore.user.email :
                     "Clique aqui",
                     style: TextStyle(
                       color: Colors.white,
